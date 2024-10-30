@@ -3,6 +3,7 @@ import { Checkbox } from "./components/forms/checkbox"
 import { Input } from "./components/forms/input"
 import { ProductCategoryRow } from "./components/products/productCategoryRow"
 import { ProductRow } from "./components/products/productRow"
+import { Range } from "./components/forms/range"
 
 
 const PRODUCTS = [
@@ -18,6 +19,7 @@ function App() {
 
   const [showStockedOnly, setShowStockedOnly] = useState(false)
   const [search, setSearch] = useState('')
+  const [range, setRange] = useState('')
 
   const visibleProduct = PRODUCTS.filter(product => {
     if (showStockedOnly && !product.stocked) {
@@ -25,6 +27,10 @@ function App() {
     }
 
     if (search && !product.name.includes(search)) {
+      return false
+    }
+
+    if (range && !product.price.includes(range)) {
       return false
     }
 
@@ -36,13 +42,15 @@ function App() {
     search={search}
     onSearchChange={setSearch}
     showStockedOnly={showStockedOnly} 
-    onStockedOnlyChange={setShowStockedOnly}/>
+    onStockedOnlyChange={setShowStockedOnly}
+    range={range}
+    onRangeChange={setRange}/>
     <ProductTable products={visibleProduct} />
   </div>
 
 }
 
-function SearchBar ({showStockedOnly, onStockedOnlyChange, search, onSearchChange}) {
+function SearchBar ({showStockedOnly, onStockedOnlyChange, search, onSearchChange, range, onRangeChange }) {
   return <div>
     <div className="mb-3">
 
@@ -50,11 +58,18 @@ function SearchBar ({showStockedOnly, onStockedOnlyChange, search, onSearchChang
       value={search} 
       onChange={onSearchChange} 
       placeholder="Rechercher..."/>
+
       <Checkbox 
       id="stocked" 
       checked={showStockedOnly} 
       onChange={onStockedOnlyChange} 
       label="N'afficher que les produits en stock"/>
+
+      <Range
+      value={range}
+      onChange={onRangeChange}
+      />
+
 
     </div>
   </div>
