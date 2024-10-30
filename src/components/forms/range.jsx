@@ -1,4 +1,10 @@
 export function Range ({value, onChange}) {
+
+    function Reset() {
+        onChange('');
+    }
+
+
     return <div className="form-check">
         <input 
         type="range" 
@@ -7,5 +13,10 @@ export function Range ({value, onChange}) {
         value={value}
         onChange={(e) => onChange(e.target.value)}
         />
+
+        <button onClick={Reset}>Reset</button>
+
     </div>
+
+
 }
