@@ -35,6 +35,8 @@ function App() {
     }
 
     // Filtrer les produits en fonction de la plage de prix
+    // Si la valeur de range et product.price sont différents alors retourner faux
+    // Soit ne pas montrer ce qui ne correspond pas à la valeur des deux
     if (range && !product.price.includes(range)) {
       return false
     }
@@ -94,6 +96,7 @@ function ProductTable({ products }) {
   let lastCategory = null
 
   // Boucle sur les produits pour les regrouper par catégorie
+  // Demander a chatgpt si on modifie product en canape cela fonctionne quand même
   for (let product of products) {
     // Ajouter une ligne de catégorie si elle change
     if (product.category !== lastCategory) {
