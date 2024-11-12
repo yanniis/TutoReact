@@ -96,7 +96,6 @@ function ProductTable({ products }) {
   let lastCategory = null
 
   // Boucle sur les produits pour les regrouper par catégorie
-  // Demander a chatgpt si on modifie product en canape cela fonctionne quand même
   for (let product of products) {
     // Ajouter une ligne de catégorie si elle change
     if (product.category !== lastCategory) {
